@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+  <head>  
+    <meta name="viewport" content="initial-scale=0.6, maximum-scale=0.6, minimum-scale=0.6, user-scalable=no" />
+    <meta charset="utf-8" />
+    <meta property="og:title" content="Mix Tape"/>
+    <meta property="og:image" content=""/>
+
+    <link rel="apple-touch-icon" href=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes">    
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mix Tape">
+
+    <title>Mix Tape</title>
+
+    <!-- Jquery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+
+    <style>        
+      html{background: #000; font-family: 'Satisfy', cursive;}
+      .container{position: absolute; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); width:100%; text-align: center; background-color: #000}
+      .tapeText{margin-top: 25px; position: absolute; margin-left: -430px; cursor: pointer;}      
+    </style> 
+
+    <script>
+    $(document).ready(function(){
+      var tracks=[<%- tracks %>];
+      var currentTrack = 0;
+
+      function updateText(){
+        $(".tapeText").html("&hearts; Mix - "+tracks[currentTrack].replace('/mixtape/', '').replace('.mp3', ''));
+      }
+
+      function play(){
+        $('#mixtape').attr('src', "/img/mixtape.gif")
+        $("#audioPlayer").get(0).play();
+        window.onclick = function(){pause();updateText();}                  
+      }
+
+      function pause(){
+        $('#mixtape').attr('src', "/img/stop.gif")
+        $('#audioPlayer').get(0).pause();
+        window.onclick = function(){play();updateText();}
+      }
+
+      function loadTrack(){
+        if(currentTrack > tracks.length-1)
+          currentTrack = 0;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', tracks[currentTrack], true);
+        xhr.responseType = "blob";
+        xhr.onload = function(e){       
+          var track = e.target.result;
+          var URL = window.URL || window.webkitURL;
+          $("#audioPlayer").attr('src', URL.createObjectURL(xhr.response));          
+          
+          if(currentTrack > 0){            
+            play();
+            updateText();
+          }
+          
+          window.onclick = function(){
+            play();            
+            updateText();            
+          }          
+        }
+        xhr.send(null);        
+      }
+
+      //Load the first track
+      loadTrack();
+
+      //Handler for audio player track ended
+      $('#audioPlayer').on('ended', function() {
+        currentTrack++;
+        loadTrack();      
+      });             
+    });
+    </script>           
+
+  </head>
+
+  <body class="body">
+    <div class="container">
+      <img id="mixtape" src="/img/stop.gif" width="500px" height="300px"/>    
+      <span class="tapeText">&hearts; Mix - Click to play...</span>
+    </div>        
+    <audio id="audioPlayer"></audio>
+  </body>
+</html>
+

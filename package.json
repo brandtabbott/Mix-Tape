@@ -1,0 +1,27 @@
+{
+  "name": "mixtape",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.0.1",
+    "ejs": "^1.0.0",
+    "express": "^3.1.1",
+    "express-session": "^1.0.2",
+    "tinycolor": "0.0.1"
+  },
+  "author": "Brandt Abbott <brandt.abbott@gmail.com>",
+  "license": "MIT",
+  "description": "A simple mix tape for your lover",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/brandtabbott/mix-tape.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brandtabbott/mix-tape/issues"
+  },
+  "homepage": "https://github.com/brandtabbott/mix-tape#readme"
+}
