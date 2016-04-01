@@ -1,6 +1,6 @@
 Mix-Tape
 
-![Mix-Tape](https://raw.github.com/brandtabbott/mix-tape/master/public/mixtape.gif)
+![Mix-Tape](https://raw.github.com/brandtabbott/mix-tape/master/public/img/mixtape.gif)
 ================
 Make a mix tape for your loved one!!  I love mix tapes.
 
