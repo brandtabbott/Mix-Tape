@@ -22,8 +22,7 @@ var contentDirectory = '/public/mixtape/';
 var files = [];
 fs.readdir(__dirname+contentDirectory, function(err,list){
   if(err) throw err;
-  for(var i=0; i<list.length; i++){
-    console.log(list[i])
+  for(var i=0; i<list.length; i++){    
     files.push('"'+contentDirectory.replace('/public', '')+list[i]+'"');  
   }
 });
