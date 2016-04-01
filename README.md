@@ -16,6 +16,9 @@ Goto URL:
 
     http://localhost:3000
 
+Usage
+------------
+    Dump mp3 files into the public/mixtape directory and GO!
 
 License
 -------
